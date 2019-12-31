@@ -1,13 +1,15 @@
-package spms.contols;
+package spms.controls;
 
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import dao.MySqlGuestBookDao;
+import spms.annotation.Component;
 import spms.bind.DataBinding;
 import spms.vo.GuestBook;
 
+@Component("/page/update.do")
 public class GuestBookUpdateController implements Controller, DataBinding {
 	MySqlGuestBookDao guestBookDao;
 

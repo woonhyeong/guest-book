@@ -1,9 +1,11 @@
-package spms.contols;
+package spms.controls;
 
 import java.util.Map;
 
 import dao.MySqlGuestBookDao;
+import spms.annotation.Component;
 
+@Component("/page/list.do")
 public class GuestBookListController implements Controller{
 	MySqlGuestBookDao guestBookDao;
 	

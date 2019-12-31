@@ -9,8 +9,10 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import spms.annotation.Component;
 import spms.vo.GuestBook;
 
+@Component("GuestBookDao")
 public class MySqlGuestBookDao implements GuestBookDao {
 	DataSource ds;
 	

@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import spms.bind.DataBinding;
 import spms.bind.ServletRequestBinder;
-import spms.contols.Controller;
-import spms.contols.GuestBookAddController;
-import spms.contols.GuestBookDeleteController;
-import spms.contols.GuestBookListController;
-import spms.contols.GuestBookUpdateController;
+import spms.context.ApplicationContext;
+import spms.controls.Controller;
+import spms.controls.GuestBookAddController;
+import spms.controls.GuestBookDeleteController;
+import spms.controls.GuestBookListController;
+import spms.controls.GuestBookUpdateController;
+import spms.listeners.ContextLoaderListener;
 import spms.vo.GuestBook;
 
 @SuppressWarnings("serial")
@@ -31,11 +33,15 @@ public class DispatcherServlet extends HttpServlet {
 		String servletPath = request.getServletPath();
 		
 		try {
-			ServletContext sc = this.getServletContext();
-
+//			ServletContext sc = this.getServletContext();
+			ApplicationContext ctx = ContextLoaderListener.getApplicationContext();
+			
 			HashMap<String, Object> model = new HashMap<String, Object>();
-		
-			Controller pageController = (Controller)sc.getAttribute(servletPath);
+//			Controller pageController = (Controller)sc.getAttribute(servletPath);
+			Controller pageController = (Controller)ctx.getBean(servletPath);
+			if (pageController == null) {
+				throw new Exception("요청한 서비스를 찾을 수 없습니다.");
+			}
 
 			if (pageController instanceof DataBinding) {
 				prepareRequestData(request, model, (DataBinding)pageController);
