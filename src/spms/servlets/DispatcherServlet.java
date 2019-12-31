@@ -32,21 +32,17 @@ public class DispatcherServlet extends HttpServlet {
 			ServletContext sc = this.getServletContext();
 
 			HashMap<String, Object> model = new HashMap<String, Object>();
-			model.put("guestBookDao", sc.getAttribute("guestBookDao"));
-
-			String pageControllerPath = null;
-			Controller pageController = null;
+		
+			Controller pageController = (Controller)sc.getAttribute(servletPath);
 
 			if ("/page/list.do".equals(servletPath)) {
-				pageController = new GuestBookListController();
+				
 			} else if ("/page/add.do".equals(servletPath)) {
-				pageController = new GuestBookAddController();
 				if (request.getParameter("email") != null) {
 					model.put("guestBook", new GuestBook().setEmail(request.getParameter("email"))
 							.setPassword(request.getParameter("password")).setContent(request.getParameter("content")));
 				}
 			} else if ("/page/update.do".equals(servletPath)) {
-				pageController = new GuestBookUpdateController();
 				if (request.getParameter("content") != null) {
 					model.put("guestBook", new GuestBook().setNo(Integer.parseInt(request.getParameter("no")))
 							.setContent(request.getParameter("content")).setPassword(request.getParameter("password")));
@@ -54,7 +50,6 @@ public class DispatcherServlet extends HttpServlet {
 					model.put("no", new Integer(request.getParameter("no")));
 				}
 			} else if ("/page/delete.do".equals(servletPath)) {
-				pageController = new GuestBookDeleteController();
 		        model.put("no", new Integer(request.getParameter("no")));
 			}
 
