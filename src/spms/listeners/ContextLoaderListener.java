@@ -8,8 +8,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
-
-import dao.MemberDao;
+import dao.GuestBookDao;
 
 @WebListener
 public class ContextLoaderListener implements ServletContextListener {
@@ -24,10 +23,10 @@ public class ContextLoaderListener implements ServletContextListener {
 			DataSource ds = (DataSource)initialContext.lookup("java:comp/env/jdbc/studydb");
 
 			
-			MemberDao memberDao = new MemberDao();
-			memberDao.setDataSource(ds);
+			GuestBookDao guestBookDao = new GuestBookDao();
+			guestBookDao.setDataSource(ds);
 			
-			sc.setAttribute("memberDao", memberDao);
+			sc.setAttribute("guestBookDao", guestBookDao);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
