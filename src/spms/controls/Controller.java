@@ -1,4 +1,4 @@
-package spms.contols;
+package spms.controls;
 
 import java.util.Map;
 

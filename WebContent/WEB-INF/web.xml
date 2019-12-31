@@ -5,6 +5,12 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>GuestBook</display-name>
 
+	<!-- 프로퍼티 정보 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/application-context.properties</param-value>
+	</context-param>
+	
 	<!-- JNDI 설정 -->
 	<resource-ref>
 		<description>DB Connection</description>
