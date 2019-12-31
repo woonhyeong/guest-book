@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.GuestBookDao;
+import dao.MySqlGuestBookDao;
 import spms.vo.GuestBook;
 
 @WebServlet("/page/add")
@@ -23,7 +23,7 @@ public class GuestBookAddServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			ServletContext sc = this.getServletContext();
-			GuestBookDao guestBookDao = (GuestBookDao)sc.getAttribute("guestBookDao");
+			MySqlGuestBookDao guestBookDao = (MySqlGuestBookDao)sc.getAttribute("guestBookDao");
 			
 			GuestBook guestBook = (GuestBook)request.getAttribute("guestBook");
 			guestBookDao.insert(guestBook);

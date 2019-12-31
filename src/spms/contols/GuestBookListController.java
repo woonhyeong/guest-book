@@ -2,12 +2,12 @@ package spms.contols;
 
 import java.util.Map;
 
-import dao.GuestBookDao;
+import dao.MySqlGuestBookDao;
 
 public class GuestBookListController implements Controller{
-	GuestBookDao guestBookDao;
+	MySqlGuestBookDao guestBookDao;
 	
-	public GuestBookListController setGuestBookDao(GuestBookDao guestBookDao) {
+	public GuestBookListController setGuestBookDao(MySqlGuestBookDao guestBookDao) {
 		this.guestBookDao = guestBookDao;
 		return this;
 	}

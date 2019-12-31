@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.GuestBookDao;
+import dao.MySqlGuestBookDao;
 import spms.vo.GuestBook;
 
 @WebServlet("/page/update")
@@ -20,7 +20,7 @@ public class GuestBookUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		try {
 			ServletContext sc = this.getServletContext();			
-			GuestBookDao guestBookDao = (GuestBookDao)sc.getAttribute("guestBookDao");
+			MySqlGuestBookDao guestBookDao = (MySqlGuestBookDao)sc.getAttribute("guestBookDao");
 			request.setAttribute("guestBook", guestBookDao.selectOne(Integer.parseInt(request.getParameter("no"))));
 			request.setAttribute("viewUrl", "/page/MemberUpdateForm.jsp");
 			
@@ -33,7 +33,7 @@ public class GuestBookUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		try {
 			ServletContext sc = this.getServletContext();
-			GuestBookDao guestBookDao = (GuestBookDao)sc.getAttribute("guestBookDao");
+			MySqlGuestBookDao guestBookDao = (MySqlGuestBookDao)sc.getAttribute("guestBookDao");
 			
 			GuestBook guestBook = (GuestBook)request.getAttribute("guestBook");
 			if (guestBookDao.check(guestBook.getPassword(), guestBook.getNo())) {

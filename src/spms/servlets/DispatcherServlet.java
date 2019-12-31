@@ -27,7 +27,7 @@ public class DispatcherServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		String servletPath = request.getServletPath();
-
+		
 		try {
 			ServletContext sc = this.getServletContext();
 

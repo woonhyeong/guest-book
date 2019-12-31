@@ -8,7 +8,11 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
-import dao.GuestBookDao;
+import dao.MySqlGuestBookDao;
+import spms.contols.GuestBookAddController;
+import spms.contols.GuestBookDeleteController;
+import spms.contols.GuestBookListController;
+import spms.contols.GuestBookUpdateController;
 
 @WebListener
 public class ContextLoaderListener implements ServletContextListener {
@@ -23,10 +27,13 @@ public class ContextLoaderListener implements ServletContextListener {
 			DataSource ds = (DataSource)initialContext.lookup("java:comp/env/jdbc/studydb");
 
 			
-			GuestBookDao guestBookDao = new GuestBookDao();
+			MySqlGuestBookDao guestBookDao = new MySqlGuestBookDao();
 			guestBookDao.setDataSource(ds);
 			
-			sc.setAttribute("guestBookDao", guestBookDao);
+			sc.setAttribute("/page/list.do", new GuestBookListController().setGuestBookDao(guestBookDao));
+			sc.setAttribute("/page/add.do", new GuestBookAddController().setGuestBookDao(guestBookDao));
+			sc.setAttribute("/page/update.do", new GuestBookUpdateController().setGuestBookDao(guestBookDao));
+			sc.setAttribute("/page/delete.do", new GuestBookDeleteController().setGuestBookDao(guestBookDao));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

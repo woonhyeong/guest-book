@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
-import dao.GuestBookDao;
+import dao.MySqlGuestBookDao;
 import spms.vo.GuestBook;
 
 public class GuestBookUpdateController implements Controller {
-	GuestBookDao guestBookDao;
+	MySqlGuestBookDao guestBookDao;
 
-	public GuestBookUpdateController setGuestBookDao(GuestBookDao guestBookDao) {
+	public GuestBookUpdateController setGuestBookDao(MySqlGuestBookDao guestBookDao) {
 		this.guestBookDao = guestBookDao;
 		return this;
 	}

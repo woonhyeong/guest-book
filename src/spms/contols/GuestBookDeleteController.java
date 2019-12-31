@@ -2,12 +2,12 @@ package spms.contols;
 
 import java.util.Map;
 
-import dao.GuestBookDao;
+import dao.MySqlGuestBookDao;
 
 public class GuestBookDeleteController implements Controller {
-	GuestBookDao guestBookDao;
+	MySqlGuestBookDao guestBookDao;
 
-	public GuestBookDeleteController setGuestBookDao(GuestBookDao guestBookDao) {
+	public GuestBookDeleteController setGuestBookDao(MySqlGuestBookDao guestBookDao) {
 		this.guestBookDao = guestBookDao;
 		return this;
 	}

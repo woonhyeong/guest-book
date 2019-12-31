@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.GuestBookDao;
+import dao.MySqlGuestBookDao;
 
 @WebServlet("/page/delete")
 @SuppressWarnings("serial")
@@ -19,7 +19,7 @@ public class GuestBookDeleteServlet extends HttpServlet{
 		
 		try {
 			ServletContext ctx = this.getServletContext();
-			GuestBookDao guestBookDao = (GuestBookDao)ctx.getAttribute("guestBookDao");
+			MySqlGuestBookDao guestBookDao = (MySqlGuestBookDao)ctx.getAttribute("guestBookDao");
 			
 			guestBookDao.delete(Integer.parseInt(request.getParameter("no")));
 			request.setAttribute("viewUrl", "redirect:list.do");
