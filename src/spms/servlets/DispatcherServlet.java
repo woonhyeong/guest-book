@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import spms.vo.Member;
+import spms.vo.GuestBook;
 
 @SuppressWarnings("serial")
 @WebServlet("*.do")
@@ -25,17 +25,17 @@ public class DispatcherServlet extends HttpServlet {
 
 			if ("/page/list.do".equals(servletPath)) {
 				pageControllerPath = "/page/list";
-			} else if (request.getParameter("email").equals(servletPath)) {
+			} else if ("/page/add.do".equals(servletPath)) {
 				pageControllerPath = "/page/add";
 				if (request.getParameter("email") != null) {
-					request.setAttribute("member", new Member().setEmail(request.getParameter("email"))
-							.setPassword(request.getParameter("email")).setName(request.getParameter("name")));
+					request.setAttribute("member", new GuestBook().setEmail(request.getParameter("email"))
+							.setPassword(request.getParameter("email")));
 				}
 			} else if ("/page/update.do".equals(servletPath)) {
 				pageControllerPath = "/page/update";
 				if (request.getParameter("email") != null) {
-					request.setAttribute("member", new Member().setNo(Integer.parseInt(request.getParameter("no")))
-							.setEmail(request.getParameter("email")).setName(request.getParameter("name")));
+					request.setAttribute("member", new GuestBook().setNo(Integer.parseInt(request.getParameter("no")))
+							.setEmail(request.getParameter("email")));
 				}
 			} else if ("/page/delete.do".equals(servletPath)) {
 				pageControllerPath = "/page/delete";

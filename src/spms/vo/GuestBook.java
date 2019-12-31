@@ -2,9 +2,8 @@ package spms.vo;
 
 import java.util.Date;
 
-public class Member {
+public class GuestBook {
 	protected int 		no;
-	protected String 	name;
 	protected String 	email;
 	protected String 	password;
 	protected String 	content;
@@ -14,23 +13,15 @@ public class Member {
 	public int getNo() {
 		return no;
 	}
-	public Member setNo(int no) {
+	public GuestBook setNo(int no) {
 		this.no = no;
 		return this;
 	}
-	
-	public String getName() {
-		return name;
-	}
-	public Member setName(String name) {
-		this.name = name;
-		return this;
-	}
-	
+		
 	public String getEmail() {
 		return email;
 	}
-	public Member setEmail(String email) {
+	public GuestBook setEmail(String email) {
 		this.email = email;
 		return this;
 	}
@@ -38,7 +29,7 @@ public class Member {
 	public String getPassword() {
 		return password;
 	}
-	public Member setPassword(String password) {
+	public GuestBook setPassword(String password) {
 		this.password = password;
 		return this;
 	}
@@ -46,7 +37,7 @@ public class Member {
 	public String getContent() {
 		return content;
 	}
-	public Member setContent(String content) {
+	public GuestBook setContent(String content) {
 		this.content = content;
 		return this;
 	}
@@ -54,7 +45,7 @@ public class Member {
 	public Date getCreatedDate() {
 		return createdDate;
 	}
-	public Member setCreatedDate(Date createdDate) {
+	public GuestBook setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 		return this;
 	}
@@ -62,7 +53,7 @@ public class Member {
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
-	public Member setModifiedDate(Date modifiedDate) {
+	public GuestBook setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 		return this;
 	}

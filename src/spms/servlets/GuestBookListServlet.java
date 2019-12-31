@@ -9,19 +9,19 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-import dao.MemberDao;
+import dao.GuestBookDao;
 
 @WebServlet("/page/list")
 @SuppressWarnings("serial")
-public class MemberListServlet extends GenericServlet {
+public class GuestBookListServlet extends GenericServlet {
 
 	@Override
 	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {	
 		try {
 			ServletContext sc = this.getServletContext();			
-			MemberDao memberDao = (MemberDao)sc.getAttribute("memberDao");
+			GuestBookDao guestBookDao = (GuestBookDao)sc.getAttribute("guestBookDao");
 						
-			request.setAttribute("members", memberDao.selectList());
+			request.setAttribute("guestBooks", guestBookDao.selectList());
 			request.setAttribute("viewUrl", "/page/MemberList.jsp");
 			
 		} catch (Exception e) {

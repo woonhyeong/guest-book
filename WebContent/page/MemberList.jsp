@@ -10,13 +10,14 @@
 </head>
 <body>
 <h1>회원 목록</h1>
-<p><a href='add'>신규 회원</a></p>
-<c:forEach var="member" items="${members}">
-${member.no},
-<a href='update?no=${member.no}'>${member.name}</a>,
-${member.email},
-${member.createdDate}
-<a href='delete?no=${member.no}'>[삭제]</a><br>
+<p><a href='add.do'>방명록 추가</a></p>
+
+<c:forEach var="guestBook" items="${guestBooks}">
+${guestBook.no},
+${guestBook.email},
+${guestBook.modifiedDate}
+<a href='update.do?no=${guestBook.no}'>[수정]</a><br>
+<p>"${guestBook.content}"</p><br>
 </c:forEach>
 </body>
 </html>
