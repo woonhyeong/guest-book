@@ -55,7 +55,7 @@ public class GuestBookDao {
 		try {
 			connection = ds.getConnection();
 			stmt = connection.prepareStatement("insert into GUESTBOOKS(EMAIL, PWD, CONTENT, CRE_DATE, MOD_DATE)"
-					+ " VALUES(?, ?, ?, ?, now(), now())");
+					+ " VALUES(?, ?, ?, now(), now())");
 			stmt.setString(1, guestBook.getEmail());
 			stmt.setString(2, guestBook.getPassword());
 			stmt.setString(3, guestBook.getContent());
@@ -96,7 +96,7 @@ public class GuestBookDao {
 		try {
 			connection = ds.getConnection();
 			stmt = connection.createStatement();
-			rs = stmt.executeQuery("select MNO, EMAIL, MNAME, CONTENT, CRE_DATE from GUESTBOOKS where MNO="
+			rs = stmt.executeQuery("select MNO, EMAIL,CONTENT, CRE_DATE from GUESTBOOKS where MNO="
 					+ no);
 			rs.next();
 			
@@ -116,12 +116,32 @@ public class GuestBookDao {
 		
 		try {
 			connection = ds.getConnection();
-			stmt = connection.prepareStatement("update GUESTBOOKS set EMAIL=?, CONTENT=?, MOD_DATE=now()"
+			stmt = connection.prepareStatement("update GUESTBOOKS set CONTENT=?, MOD_DATE=now()"
 					+ " where MNO=?");
-			stmt.setString(1, guestBook.getEmail());
-			stmt.setString(2, guestBook.getContent());
-			stmt.setInt(4, guestBook.getNo());
+			stmt.setString(1, guestBook.getContent());
+			stmt.setInt(2, guestBook.getNo());
 			return stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {if(stmt!=null) stmt.close();} catch(Exception e) {}
+			try {if(connection!=null) connection.close();} catch(Exception e) {}
+		}
+	}
+	
+	public boolean check(String password, int no) throws Exception {
+		Connection connection = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			connection = ds.getConnection();
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery("select PWD from GUESTBOOKS where MNO="+no);
+			rs.next();
+			
+			if(rs.getString("PWD").equals(password)){
+				return true;
+			} else return false;
 		} catch (Exception e) {
 			throw e;
 		} finally {

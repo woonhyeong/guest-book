@@ -18,6 +18,7 @@ public class DispatcherServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		String servletPath = request.getServletPath();
 
 		try {
@@ -28,14 +29,14 @@ public class DispatcherServlet extends HttpServlet {
 			} else if ("/page/add.do".equals(servletPath)) {
 				pageControllerPath = "/page/add";
 				if (request.getParameter("email") != null) {
-					request.setAttribute("member", new GuestBook().setEmail(request.getParameter("email"))
-							.setPassword(request.getParameter("email")));
+					request.setAttribute("guestBook", new GuestBook().setEmail(request.getParameter("email"))
+							.setPassword(request.getParameter("password")).setContent(request.getParameter("content")));
 				}
 			} else if ("/page/update.do".equals(servletPath)) {
 				pageControllerPath = "/page/update";
-				if (request.getParameter("email") != null) {
-					request.setAttribute("member", new GuestBook().setNo(Integer.parseInt(request.getParameter("no")))
-							.setEmail(request.getParameter("email")));
+				if (request.getParameter("content") != null) {
+					request.setAttribute("guestBook", new GuestBook().setNo(Integer.parseInt(request.getParameter("no")))
+							.setContent(request.getParameter("content")).setPassword(request.getParameter("password")));
 				}
 			} else if ("/page/delete.do".equals(servletPath)) {
 				pageControllerPath = "/page/delete";
