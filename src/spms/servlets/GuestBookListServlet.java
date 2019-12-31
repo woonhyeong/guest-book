@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-import dao.GuestBookDao;
+import dao.MySqlGuestBookDao;
 
 @WebServlet("/page/list")
 @SuppressWarnings("serial")
@@ -19,7 +19,7 @@ public class GuestBookListServlet extends GenericServlet {
 	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {	
 		try {
 			ServletContext sc = this.getServletContext();			
-			GuestBookDao guestBookDao = (GuestBookDao)sc.getAttribute("guestBookDao");
+			MySqlGuestBookDao guestBookDao = (MySqlGuestBookDao)sc.getAttribute("guestBookDao");
 						
 			request.setAttribute("guestBooks", guestBookDao.selectList());
 			request.setAttribute("viewUrl", "/page/MemberList.jsp");

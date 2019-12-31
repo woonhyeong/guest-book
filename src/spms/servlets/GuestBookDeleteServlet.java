@@ -1,6 +1,7 @@
 package spms.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,25 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.MySqlGuestBookDao;
-import spms.vo.GuestBook;
 
-@WebServlet("/page/add")
+@WebServlet("/page/delete")
 @SuppressWarnings("serial")
-public class GuestBookAddServlet extends HttpServlet {
+public class GuestBookDeleteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("viewUrl", "/page/MemberForm.jsp");
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
-			ServletContext sc = this.getServletContext();
-			MySqlGuestBookDao guestBookDao = (MySqlGuestBookDao)sc.getAttribute("guestBookDao");
+			ServletContext ctx = this.getServletContext();
+			MySqlGuestBookDao guestBookDao = (MySqlGuestBookDao)ctx.getAttribute("guestBookDao");
 			
-			GuestBook guestBook = (GuestBook)request.getAttribute("guestBook");
-			guestBookDao.insert(guestBook);
-			
+			guestBookDao.delete(Integer.parseInt(request.getParameter("no")));
 			request.setAttribute("viewUrl", "redirect:list.do");
 			
 		} catch (Exception e) {

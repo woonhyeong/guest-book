@@ -26,7 +26,7 @@ $(document).ready(function(){
 내용: <input type='text' name='content' id="Content" value='${guestBook.content}'><br>
 <input type='submit' id="submit" value='저장'>
 <input type='button' value='삭제' 
-  onclick='location.href="delete?no=${guestBook.no}";'>
+  onclick='location.href="delete.do?no=${guestBook.no}";'>
 <input type='button' value='취소' onclick='location.href="list.do"'>
 </form>
 </body>
