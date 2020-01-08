@@ -1,5 +1,6 @@
 package spms.controls;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -30,7 +31,7 @@ public class GuestBookUpdateController implements Controller, DataBinding {
 			model.put("guestBook", guestBookDao.selectOne((Integer) model.get("no")));
 			return "/page/MemberUpdateForm.jsp";
 
-		} else {
+		} else {					
 			if (guestBookDao.check(guestBook.getPassword(), guestBook.getNo())) {
 				guestBookDao.update(guestBook);
 				return "redirect:list.do";

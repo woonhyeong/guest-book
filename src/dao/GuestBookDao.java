@@ -11,5 +11,5 @@ public interface GuestBookDao {
 	GuestBook selectOne(int no) throws Exception;
 	int update(GuestBook guestBook) throws Exception;
 	public boolean check(String password, int no) throws Exception;
-	public GuestBook exist(String email, String password) throws Exception;
+//	public GuestBook exist(String email, String password) throws Exception;
 }
