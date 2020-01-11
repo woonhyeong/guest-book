@@ -36,11 +36,8 @@
 	
 	<update id="update" parameterType="guestBook">
 		update GUESTBOOKS set 
-		EMAIL=#{email},
-		PWD=#{password},
 		CONTENT=#{content},
-		CRE_DATE=#{createdDate},
-		MOD_DATE=#{modifiedDate} 
+		MOD_DATE=now() 
 		where MNO=#{no}
 	</update>
 	

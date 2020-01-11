@@ -85,8 +85,8 @@ public class MySqlGuestBookDao implements GuestBookDao {
 		
 		try {
 			String searchedPassword = sqlSession.selectOne("spms.dao.GuestBookDao.check", no);
-			
-			if (password == searchedPassword) {
+	
+			if (password.equals(searchedPassword)) {
 				return true;
 			} else { 
 				return false;
