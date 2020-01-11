@@ -1,4 +1,4 @@
-package dao;
+package spms.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,21 +49,21 @@ public class MySqlGuestBookDao implements GuestBookDao {
 		}
 	}
 	
-	public int delete(int no) throws Exception {
+	public GuestBook selectOne(int no) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int count = sqlSession.delete("spms.dao.GuestBook.delete", no);
-			sqlSession.commit();
-			return count;
+			return sqlSession.selectOne("spms.dao.GuestBookDao.selectOne", no);
 		} finally {
 			sqlSession.close();
 		}
 	}
 	
-	public GuestBook selectOne(int no) throws Exception {
+	public int delete(int no) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			return sqlSession.selectOne("spms.dao.GuestBook.selectOne", no);
+			int count = sqlSession.delete("spms.dao.GuestBookDao.delete", no);
+			sqlSession.commit();
+			return count;
 		} finally {
 			sqlSession.close();
 		}
@@ -72,7 +72,7 @@ public class MySqlGuestBookDao implements GuestBookDao {
 	public int update(GuestBook guestBook) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int count = sqlSession.update("spms.dao.GuestBook.update", guestBook);
+			int count = sqlSession.update("spms.dao.GuestBookDao.update", guestBook);
 			sqlSession.commit();
 			return count;
 		} finally {
@@ -84,7 +84,7 @@ public class MySqlGuestBookDao implements GuestBookDao {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-			String searchedPassword = sqlSession.selectOne("spms.dao.GuestBook.check", no);
+			String searchedPassword = sqlSession.selectOne("spms.dao.GuestBookDao.check", no);
 			
 			if (password == searchedPassword) {
 				return true;

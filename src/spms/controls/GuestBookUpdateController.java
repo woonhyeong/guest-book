@@ -1,13 +1,11 @@
 package spms.controls;
 
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 
-import dao.MySqlGuestBookDao;
 import spms.annotation.Component;
 import spms.bind.DataBinding;
+import spms.dao.MySqlGuestBookDao;
 import spms.vo.GuestBook;
 
 @Component("/page/update.do")

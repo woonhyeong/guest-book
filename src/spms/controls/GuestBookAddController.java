@@ -2,9 +2,9 @@ package spms.controls;
 
 import java.util.Map;
 
-import dao.MySqlGuestBookDao;
 import spms.annotation.Component;
 import spms.bind.DataBinding;
+import spms.dao.MySqlGuestBookDao;
 import spms.vo.GuestBook;
 
 @Component("/page/add.do")

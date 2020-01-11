@@ -1,4 +1,4 @@
-package dao;
+package spms.dao;
 
 import java.util.List;
 
