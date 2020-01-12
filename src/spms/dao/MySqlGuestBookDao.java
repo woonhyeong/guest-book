@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -29,10 +30,10 @@ public class MySqlGuestBookDao implements GuestBookDao {
 	}
 	
 	
-	public List<GuestBook> selectList() throws Exception {
+	public List<GuestBook> selectList(HashMap<String,Object> paramMap) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			return sqlSession.selectList("spms.dao.GuestBookDao.selectList");
+			return sqlSession.selectList("spms.dao.GuestBookDao.selectList", paramMap);
 		} finally {
 			sqlSession.close();
 		}
