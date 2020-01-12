@@ -2,11 +2,10 @@ package spms.controls;
 
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 
-import dao.MySqlGuestBookDao;
 import spms.annotation.Component;
 import spms.bind.DataBinding;
+import spms.dao.MySqlGuestBookDao;
 import spms.vo.GuestBook;
 
 @Component("/page/update.do")
@@ -30,7 +29,7 @@ public class GuestBookUpdateController implements Controller, DataBinding {
 			model.put("guestBook", guestBookDao.selectOne((Integer) model.get("no")));
 			return "/page/MemberUpdateForm.jsp";
 
-		} else {
+		} else {					
 			if (guestBookDao.check(guestBook.getPassword(), guestBook.getNo())) {
 				guestBookDao.update(guestBook);
 				return "redirect:list.do";

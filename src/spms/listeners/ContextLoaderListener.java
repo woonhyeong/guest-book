@@ -1,21 +1,19 @@
 package spms.listeners;
 
 
-import javax.naming.InitialContext;
+import java.io.InputStream;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
-import com.apple.eawt.ApplicationBeanInfo;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import dao.MySqlGuestBookDao;
 import spms.context.ApplicationContext;
-import spms.controls.GuestBookAddController;
-import spms.controls.GuestBookDeleteController;
-import spms.controls.GuestBookListController;
-import spms.controls.GuestBookUpdateController;
 
 @WebListener
 public class ContextLoaderListener implements ServletContextListener {
@@ -29,22 +27,22 @@ public class ContextLoaderListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		try {
-			ServletContext sc = event.getServletContext();
+			applicationContext = new ApplicationContext();
 			
-			String propertiesPath =sc.getRealPath(sc.getInitParameter("contextConfigLocation"));
-			applicationContext = new ApplicationContext(propertiesPath);
-//			InitialContext initialContext = new InitialContext();
-//			DataSource ds = (DataSource)initialContext.lookup("java:comp/env/jdbc/studydb");
-//
-//			
-//			MySqlGuestBookDao guestBookDao = new MySqlGuestBookDao();
-//			guestBookDao.setDataSource(ds);
-//			
-//			sc.setAttribute("/page/list.do", new GuestBookListController().setGuestBookDao(guestBookDao));
-//			sc.setAttribute("/page/add.do", new GuestBookAddController().setGuestBookDao(guestBookDao));
-//			sc.setAttribute("/page/update.do", new GuestBookUpdateController().setGuestBookDao(guestBookDao));
-//			sc.setAttribute("/page/delete.do", new GuestBookDeleteController().setGuestBookDao(guestBookDao));
-		} catch (Exception e) {
+			String resource = "spms/dao/mybatis-config.xml";
+			InputStream inputStream = Resources.getResourceAsStream(resource);
+			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			
+			applicationContext.addBean("sqlSessionFactory", sqlSessionFactory);
+			
+			ServletContext sc = event.getServletContext();
+			String propertiesPath = sc.getRealPath(sc.getInitParameter("contextConfigLocation"));
+			
+			applicationContext.prepareObjectsByProperties(propertiesPath);
+			//applicationContext.prepareObjectsByAnnotaion("");
+			applicationContext.injectDendency();
+			
+		} catch(Throwable e) {
 			e.printStackTrace();
 		}
 	}

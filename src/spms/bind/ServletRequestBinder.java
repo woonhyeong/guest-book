@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.servlet.ServletRequest;
 
+import spms.vo.GuestBook;
+
 public class ServletRequestBinder {
 	public static Object bind(ServletRequest request, Class<?> dataType, String dataName) throws Exception {
 		if (isPrimitiveType(dataType)) {
@@ -13,6 +15,7 @@ public class ServletRequestBinder {
 		}
 		
 		Set<String> paramNames = request.getParameterMap().keySet();
+		
 		Object dataObject = dataType.newInstance();
 		Method m = null;
 		
@@ -22,6 +25,7 @@ public class ServletRequestBinder {
 				m.invoke(dataObject, createValueObject(m.getParameterTypes()[0], request.getParameter(paramName)));
 			}
 		}
+		
 		return dataObject;
 	}
 	

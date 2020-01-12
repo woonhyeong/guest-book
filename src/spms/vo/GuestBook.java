@@ -29,6 +29,7 @@ public class GuestBook {
 	public String getPassword() {
 		return password;
 	}
+	
 	public GuestBook setPassword(String password) {
 		this.password = password;
 		return this;

@@ -14,7 +14,7 @@
 암호: <input type='password' name='password'><br>
 내용: <input type='text' name='content'><br>
 <input type='submit' value='추가'>
-<input type='reset' value='취소'>
+<input type='reset' value='취소' onclick='location.href="list.do"'>
 </form>
 </body>
 </html>
