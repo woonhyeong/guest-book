@@ -40,10 +40,14 @@
 		where MNO=#{value}
 	</delete>
 	
-	<update id="update" parameterType="guestBook">
-		update GUESTBOOKS set 
-		CONTENT=#{content},
-		MOD_DATE=now() 
+	<update id="update" parameterType="map">
+		update GUESTBOOKS 
+		<set>
+			<if test="email != null">EMAIL=#{email}, </if>
+			<if test="password != null">PWD=#{password}, </if>
+			<if test="content != null">CONTENT=#{content}, </if>
+			MOD_DATE=now() 
+		</set>
 		where MNO=#{no}
 	</update>
 	

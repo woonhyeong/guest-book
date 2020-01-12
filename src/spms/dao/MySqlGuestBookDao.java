@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -73,9 +74,27 @@ public class MySqlGuestBookDao implements GuestBookDao {
 	public int update(GuestBook guestBook) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int count = sqlSession.update("spms.dao.GuestBookDao.update", guestBook);
-			sqlSession.commit();
-			return count;
+			GuestBook original = sqlSession.selectOne("spms.dao.GuestBookDao.selectOne", guestBook.getNo());
+			Hashtable<String, Object> paramMap = new Hashtable<String, Object>();
+			
+			if (!guestBook.getEmail().equals(original.getEmail())) {
+				paramMap.put("email", guestBook.getEmail());
+			}
+			if (!guestBook.getPassword().equals(original.getPassword())) {
+				paramMap.put("password", guestBook.getPassword());
+			}
+			if (!guestBook.getContent().equals(original.getContent())) {
+				paramMap.put("content", guestBook.getContent());
+			}
+			
+			if (paramMap.size() > 0) {
+				paramMap.put("no", guestBook.getNo());
+				int count = sqlSession.update("spms.dao.GuestBookDao.update", paramMap);
+				sqlSession.commit();
+				return count;
+			}
+			
+			return 0;
 		} finally {
 			sqlSession.close();
 		}
